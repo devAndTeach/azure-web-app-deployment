@@ -36,11 +36,12 @@
 		where id = #{id}
 	</update>
 
-	<insert id="insertWidget" parameterType="Widget">
+	<insert id="insertWidget" parameterType="Widget"
+	   useGeneratedKeys="true" keyProperty="id" keyColumn="id"  >
 		insert into widgets
-		(id, description, price, gears, sprockets)
+		(description, price, gears, sprockets)
 		values
-		(#{id}, #{description}, #{price}, #{gears}, #{sprockets})
+		(#{description}, #{price}, #{gears}, #{sprockets})
 	</insert>
 
 	<!-- Gadget Operations -->
@@ -71,11 +72,12 @@
 		where id = #{id}
 	</update>
 
-	<insert id="insertGadget" parameterType="Gadget">
+	<insert id="insertGadget" parameterType="Gadget"
+	    useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
 		insert into gadgets
-		(id, description, price, cylinders)
+		(description, price, cylinders)
 		values
-		(#{id}, #{description}, #{price}, #{cylinders})
+		(#{description}, #{price}, #{cylinders})
 	</insert>
 
 </mapper>
