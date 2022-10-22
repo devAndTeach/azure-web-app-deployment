@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- The namespace defines the location of the Java interface. -->
+<!-- The operation names here must match the method names in the interface. -->
+<mapper namespace="com.fidelity.integration.mapper.WarehouseMapper">
+
+	<!-- Widget Operations -->
+	<select id="getAllWidgets" resultType="Widget">
+		SELECT id, description, price, gears, sprockets
+		from widgets
+		order by id
+	</select>
+
+	<select id="getWidget" parameterType="int" resultType="Widget">
+		SELECT id, description, price, gears, sprockets
+		from
+		widgets
+		where id = #{id}
+		order by id
+	</select>
+
+	<delete id="deleteWidget" parameterType="int">
+		delete from widgets
+		where id = #{value}
+	</delete>
+
+	<update id="updateWidget" parameterType="Widget">
+		update widgets
+		set
+		description = #{description},
+		price = #{price},
+		gears = #{gears},
+		sprockets = #{sprockets}
+		where id = #{id}
+	</update>
+
+	<insert id="insertWidget" parameterType="Widget">
+		insert into widgets
+		(id, description, price, gears, sprockets)
+		values
+		(#{id}, #{description}, #{price}, #{gears}, #{sprockets})
+	</insert>
+
+	<!-- Gadget Operations -->
+	<select id="getAllGadgets" resultType="Gadget">
+		SELECT id, description, price, cylinders
+		from gadgets
+		order by id
+	</select>
+
+	<select id="getGadget" parameterType="int" resultType="Gadget">
+		SELECT id, description, price, cylinders
+		from gadgets
+		where id = #{id}
+		order by id
+	</select>
+
+	<delete id="deleteGadget" parameterType="int">
+		delete from gadgets
+		where id = #{value}
+	</delete>
+
+	<update id="updateGadget" parameterType="Gadget">
+		update gadgets
+		set
+		description = #{description},
+		price = #{price},
+		cylinders = #{cylinders}
+		where id = #{id}
+	</update>
+
+	<insert id="insertGadget" parameterType="Gadget">
+		insert into gadgets
+		(id, description, price, cylinders)
+		values
+		(#{id}, #{description}, #{price}, #{cylinders})
+	</insert>
+
+</mapper>
