@@ -120,29 +120,28 @@ class WarehouseBusinessServiceIntegrationTest {
 	
 	@Test
 	void testInsertWidget() {
-		int id = 42;
-		
-		// verify Widget 42 is NOT in the database
-		assertThat(0, is(equalTo(
-			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "widgets", "id = " + id))));
-
-		Widget w = new Widget(id, "Test widget", 4.52, 20, 10);
+	
+		Widget w = new Widget(0, "Test widget", 4.52, 20, 10);
 
 		int rows = service.addWidget(w);
 		
 		// verify that 1 row was inserted		
 		assertThat(rows, is(equalTo(1)));
 		
-		// verify that Widget 42 iIS in the database
+		// verify that Widget data IS in the database
+		
 		assertThat(1, is(equalTo(
-			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "widgets", "id = " + id))));
-	}
+			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "widgets", 
+					 " id = " + w.getId() +
+					 " AND price = "+ w.getPrice() +
+					 " AND description = '"+ w.getDescription()+"'" +
+					 " AND gears = "+ w.getGears()))));}
 	
 	@Test
 	void testUpdateWidget() {
 		int id = 1;
 		
-		// load Widget 1 from teh database
+		// load Widget 1 from the database
 		Widget localWidget = loadWidgetFromDb(id);
 		
 		// modify the local Widget 1
@@ -200,22 +199,21 @@ class WarehouseBusinessServiceIntegrationTest {
 	
 	@Test
 	void testInsertGadget() {
-		int id = 42;
-		
-		// verify that Gadget 42 is NOT in the database
-		assertThat(0, is(equalTo(
-			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "gadgets", "id = " + id))));
-
-		Gadget g = new Gadget(id, "Two Cylinder Gadget", 19.99, 2);
+	    //database will generate the gadgetId primary key value
+		Gadget g = new Gadget(0, "Two Cylinder Gadget", 19.99, 2);
 
 		int rows = service.addGadget(g);
 		
 		// verify that 1 row was inserted
 		assertThat(rows, is(equalTo(1)));
 		
-		// verify that Gadget 42 IS in the database
+		// verify that Gadget data IS in the database
 		assertThat(1, is(equalTo(
-			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "gadgets", "id = " + id))));
+			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "gadgets", 
+					 " id = " + g.getId() +
+					 " AND price = "+ g.getPrice() +
+					 " AND description = '"+ g.getDescription()+"'" +
+					 " AND cylinders = "+ g.getCylinders()))));
 	}
 	
 	@Test
