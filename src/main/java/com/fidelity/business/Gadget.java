@@ -18,6 +18,15 @@ public class Gadget extends Product {
 		super(description, id, unitPrice);
 		this.cylinders = cylinders;
 	}
+	
+	
+	public Gadget(String description, double unitPrice, int cylinders) {
+		this(0,description,unitPrice,cylinders);
+		
+	}
+	
+	
+	
 
 	public Gadget() {}
 

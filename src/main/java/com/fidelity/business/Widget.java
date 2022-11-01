@@ -19,6 +19,9 @@ public class Widget extends Product {
 		this.gears = gears;
 		this.sprockets = sprockets;
 	}
+	public Widget(String description, double unitPrice, int gears, int sprockets) {
+		this(0,description,unitPrice,gears,sprockets);
+	}
 
 	public Widget() {}
 

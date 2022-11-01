@@ -107,13 +107,11 @@ public class WarehouseDaoMyBatisImplUnitTest {
 
 	@Test
 	void testInsertWidget() {
-		int id = 42;
 		
-		// verify that Widget with id = 42 is NOT in the database
-		assertThat(0, is(equalTo(
-			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "widgets", "id = " + id))));
+		
+		
 
-		Widget w = new Widget(id, "Test widget", 4.52, 20, 10);
+		Widget w = new Widget("Test widget", 4.52, 20, 10);
 
 		int rows = dao.insertWidget(w);
 		
@@ -122,7 +120,7 @@ public class WarehouseDaoMyBatisImplUnitTest {
 		
 		// verify that Widget with id = 42 IS in the database
 		assertThat(1, is(equalTo(
-			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "widgets", "id = " + id))));
+			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "widgets", "id = " + w.getId()))));
 	}
 
 	@Test
@@ -191,7 +189,7 @@ public class WarehouseDaoMyBatisImplUnitTest {
 		assertThat(0, is(equalTo(
 			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "gadgets", "id = " + id))));
 
-		Gadget g = new Gadget(id, "Test Gadget", 99.99, 2);
+		Gadget g = new Gadget("Test Gadget", 99.99, 2);
 
 		int rows = dao.insertGadget(g);
 		
@@ -200,7 +198,7 @@ public class WarehouseDaoMyBatisImplUnitTest {
 		
 		// verify that the Gadget with id = 42 IS in the database
 		assertThat(1, is(equalTo(
-			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "gadgets", "id = " + id))));
+			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "gadgets", "id = " + g.getId()))));
 	}
 
 	@Test

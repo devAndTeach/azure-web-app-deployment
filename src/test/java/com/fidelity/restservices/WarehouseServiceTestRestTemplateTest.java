@@ -198,8 +198,8 @@ public class WarehouseServiceTestRestTemplateTest {
 	public void testAddWidgetToWarehouse() throws Exception {
 		int widgetCount = JdbcTestUtils.countRowsInTable(jdbcTemplate, "widgets");
 		
-		int id = 42;
-		Widget w = new Widget(id, "Test widget", 4.52, 20, 10);
+
+		Widget w = new Widget("Test widget", 4.52, 20, 10);
 
 		String request = "/warehouse/widgets";
 		
@@ -214,9 +214,7 @@ public class WarehouseServiceTestRestTemplateTest {
 		int newWidgetCount = JdbcTestUtils.countRowsInTable(jdbcTemplate, "widgets");
 		assertThat(newWidgetCount, is(equalTo(widgetCount + 1)));
 		
-		// verify that the new widget is in the Widgets table
-		assertThat(1, equalTo(
-			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "widgets", "id = " + id)));
+		
 	}
 
 	/**
@@ -399,8 +397,8 @@ public class WarehouseServiceTestRestTemplateTest {
 		String tableName = "gadgets";
 		int gadgetCount = JdbcTestUtils.countRowsInTable(jdbcTemplate, tableName);
 		
-		int id = 42;
-		Gadget w = new Gadget(42, "Test Gadget", 19.99, 2);
+		
+		Gadget w = new Gadget("Test Gadget", 19.99, 2);
 
 		String request = "/warehouse/gadgets";
 		
@@ -412,12 +410,9 @@ public class WarehouseServiceTestRestTemplateTest {
 		assertThat(response.getBody().getRowCount(), is(equalTo(1))); // {"rowCount": 1}
 		
 		// verify that one row was added to the Gadgets table
-		int newWidgetCount = JdbcTestUtils.countRowsInTable(jdbcTemplate, tableName);
-		assertThat(newWidgetCount, is(equalTo(gadgetCount + 1)));
+		int newGadgetCount = JdbcTestUtils.countRowsInTable(jdbcTemplate, tableName);
+		assertThat(newGadgetCount, is(equalTo(gadgetCount + 1)));		
 		
-		// verify that the new Gadget is in the Gadgets table
-		assertThat(1, equalTo(
-			JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, tableName, "id = " + id)));
 	}
 
 	/**
